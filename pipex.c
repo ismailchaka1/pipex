@@ -6,7 +6,7 @@
 /*   By: chaka <chaka@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 23:35:13 by chaka             #+#    #+#             */
-/*   Updated: 2024/12/15 01:34:29 by chaka            ###   ########.fr       */
+/*   Updated: 2024/12/15 01:35:29 by chaka            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,4 @@ int main(int argc, char **argv, char **envp)
     printf("%s \n", argv[1]);
     printf("%s \n", argv[argc -1]);
     return 0;
-    
 }
