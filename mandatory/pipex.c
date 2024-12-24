@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/wait.h>
-#include "libft/libft.h"
+#include "../libft/libft.h"
 
 char **get_paths(char **env)
 {
@@ -53,7 +53,7 @@ int main(int ac, char **av, char **envp)
 
     if (fd1 == -1 || fd2 == -1)
     {
-        perror("File error");
+        perror("No such file or directory");
         return 1;
     }
 
@@ -118,6 +118,5 @@ int main(int ac, char **av, char **envp)
     free(paths);
     close(fd1);
     close(fd2);
-
     return 0;
 }
