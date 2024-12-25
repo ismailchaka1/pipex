@@ -19,7 +19,7 @@ NAME_BONUS = pipex_bonus
 OBJS = ${SRCS:.c=.o}
 OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 RM = rm -f
 
 all: ${NAME}
