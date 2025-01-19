@@ -6,7 +6,7 @@
 /*   By: ichakank <ichakank@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 15:30:16 by ichakank          #+#    #+#             */
-/*   Updated: 2024/12/25 20:16:35 by ichakank         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:57:13 by ichakank         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,10 @@ void handle_fd(t_pipex *pipex, char **av, char **envp)
     pipex->paths = get_paths(envp);
 }
 
-int handle_pipe(t_pipex *pipex)
+void handle_pipe(t_pipex *pipex)
 {
     close(pipex->infd);
     close(pipex->outfd);
-    pipex->exitstatus = 1;
-    return 1;
 }
 
 int main(int ac, char **av, char **envp)
@@ -119,7 +117,7 @@ int main(int ac, char **av, char **envp)
         char **arguments = ft_split(av[pipex.index], ' ');
         char *executable = get_command(pipex.paths, arguments[0]);
         if (executable == NULL)
-            pipex.exitstatus = 127;
+            exit(127);
         execute_command(executable, arguments, envp, &pipex);
         wait(NULL);
         pipex.index++;
@@ -127,5 +125,5 @@ int main(int ac, char **av, char **envp)
     free_paths(pipex.paths);
     close(pipex.infd);
     close(pipex.outfd);
-    return pipex.exitstatus;
+    return 0;
 }
