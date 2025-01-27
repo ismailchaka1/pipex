@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ichakank <ichakank@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:05:41 by ichakank          #+#    #+#             */
-/*   Updated: 2024/11/04 00:13:48 by ichakank         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:49:27 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# include <fcntl.h>
+# include <limits.h>
+# include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
-#include <stdint.h>
- #include <fcntl.h>
 
 typedef struct s_list
 {

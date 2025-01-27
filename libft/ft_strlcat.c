@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ichakank <ichakank@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 21:52:10 by ichakank          #+#    #+#             */
-/*   Updated: 2024/11/03 23:50:51 by ichakank         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:18:36 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	dst[c] = '\0';
 	return (ft_strlen(dst) + ft_strlen(&src[d]));
 }
-
