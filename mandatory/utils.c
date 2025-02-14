@@ -6,20 +6,27 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:03:15 by root              #+#    #+#             */
-/*   Updated: 2025/01/27 17:47:44 by root             ###   ########.fr       */
+/*   Updated: 2025/02/14 21:32:16 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**get_paths(char **env)
+char **get_paths(char **env)
 {
-	int	i;
+    int i = 0;
 
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5) != 0)
-		i++;
-	return (ft_split(env[i] + 5, ':'));
+    if (!env || !env[0])
+        return NULL;
+    while (env[i])
+    {
+        if (ft_strncmp(env[i], "PATH=", 5) == 0)
+            break;
+        i++;
+    }
+    if (!env[i])
+        return NULL;
+    return ft_split(env[i] + 5, ':');
 }
 
 char	*get_command(char **paths, char *command)

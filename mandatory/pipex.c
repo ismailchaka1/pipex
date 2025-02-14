@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:03:07 by root              #+#    #+#             */
-/*   Updated: 2025/01/27 17:47:14 by root             ###   ########.fr       */
+/*   Updated: 2025/02/14 21:29:56 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	handle_fd(t_pipex *pipex, char **av, char **envp)
 		exit(0);
 	}
 	pipex->paths = get_paths(envp);
+	if (pipex->paths == NULL)
+		exit(1);
 }
 
 void	handle_pipe(t_pipex *pipex)
