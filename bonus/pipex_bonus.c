@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:03:07 by root              #+#    #+#             */
-/*   Updated: 2025/01/27 17:50:12 by root             ###   ########.fr       */
+/*   Updated: 2025/02/18 19:27:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,26 @@ void	handle_pipe(t_pipex *pipex)
 	close(pipex->outfd);
 }
 
+void	free_args(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_pipex	pipex;
 	char	**arguments;
 	char	*executable;
 
-	if (ac != 5)
+	if (ac < 5)
 		return (1);
 	pipex.index = 2;
 	pipex.ac = ac;
@@ -71,13 +84,12 @@ int	main(int ac, char **av, char **envp)
 		if (pipe(pipex.fdpipe) == -1)
 			handle_pipe(&pipex);
 		arguments = ft_split(av[pipex.index], ' ');
-		executable = get_command(pipex.paths, arguments[0]);
-		if (executable == NULL)
-			exit(127);
+		executable = get_command(pipex.paths, arguments[0], arguments);
 		execute_command(executable, arguments, envp, &pipex);
-		waitpid(-1, &pipex.status, 0);
 		pipex.index++;
 	}
+	while (waitpid(-1, &pipex.status, 0) > 0)
+		;
 	free_paths(pipex.paths);
 	handle_pipe(&pipex);
 	return (pipex.status);

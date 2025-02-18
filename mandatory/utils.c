@@ -6,30 +6,34 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:03:15 by root              #+#    #+#             */
-/*   Updated: 2025/02/14 21:32:16 by root             ###   ########.fr       */
+/*   Updated: 2025/02/18 19:47:04 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char **get_paths(char **env)
+char	**get_paths(char **env)
 {
-    int i = 0;
+	int	i;
 
-    if (!env || !env[0])
-        return NULL;
-    while (env[i])
-    {
-        if (ft_strncmp(env[i], "PATH=", 5) == 0)
-            break;
-        i++;
-    }
-    if (!env[i])
-        return NULL;
-    return ft_split(env[i] + 5, ':');
+	i = 0;
+	if (!env || !env[0])
+		return (exit(127), NULL);
+	while (env[i] && ft_strncmp(env[i], "PATH=", 5) != 0)
+		i++;
+	if (!env[i])
+		return (exit(127), NULL);
+	return (ft_split(env[i] + 5, ':'));
 }
 
-char	*get_command(char **paths, char *command)
+void	cleangarbage(char **paths, char **arguments)
+{
+	free_paths(paths);
+	free_args(arguments);
+	exit(127);
+}
+
+char	*get_command(char **paths, char *command, char **arguments)
 {
 	int		i;
 	char	*path;
@@ -41,7 +45,7 @@ char	*get_command(char **paths, char *command)
 		if (access(command, F_OK | X_OK) == 0)
 			return (ft_strdup(command));
 		else
-			return (perror("Error:"), NULL);
+			return (perror("Error:"), cleangarbage(paths, arguments), NULL);
 	}
 	while (paths[i])
 	{
@@ -53,7 +57,7 @@ char	*get_command(char **paths, char *command)
 		free(path);
 		i++;
 	}
-	return (perror(command), NULL);
+	return (perror(command), cleangarbage(paths, arguments), NULL);
 }
 
 int	open_files(char *infile, char *outfile)
@@ -82,17 +86,4 @@ void	free_paths(char **paths)
 		i++;
 	}
 	free(paths);
-}
-
-void	free_args(char **args)
-{
-	int	i;
-
-	i = 0;
-	while (args[i])
-	{
-		free(args[i]);
-		i++;
-	}
-	free(args);
 }

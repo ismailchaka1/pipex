@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 15:29:41 by ichakank          #+#    #+#             */
-/*   Updated: 2025/01/27 17:50:55 by root             ###   ########.fr       */
+/*   Updated: 2025/02/18 15:30:56 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_pipex
 }			t_pipex;
 
 char		**get_paths(char **env);
-char		*get_command(char **paths, char *command);
+char		*get_command(char **paths, char *command, char **arguments);
 int			open_files(char *infile, char *outfile);
 void		free_paths(char **paths);
 void		free_args(char **args);

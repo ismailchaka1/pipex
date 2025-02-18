@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:03:07 by root              #+#    #+#             */
-/*   Updated: 2025/02/14 21:29:56 by root             ###   ########.fr       */
+/*   Updated: 2025/02/18 19:29:10 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,12 @@ int	main(int ac, char **av, char **envp)
 		if (pipe(pipex.fdpipe) == -1)
 			handle_pipe(&pipex);
 		arguments = ft_split(av[pipex.index], ' ');
-		executable = get_command(pipex.paths, arguments[0]);
-		if (executable == NULL)
-			exit(127);
+		executable = get_command(pipex.paths, arguments[0], arguments);
 		execute_command(executable, arguments, envp, &pipex);
-		waitpid(-1, &pipex.status, 0);
 		pipex.index++;
 	}
+	while (waitpid(-1, &pipex.status, 0) > 0)
+		;
 	free_paths(pipex.paths);
 	handle_pipe(&pipex);
 	return (pipex.status);
